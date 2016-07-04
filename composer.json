@@ -1,0 +1,16 @@
+{
+    "name": "letscode/lara-wp",
+    "description": "Laravel package to access wordpress databases",
+    "authors": [
+        {
+            "name": "Papp Krisztian",
+            "email": "fejlesztes@letscode.hu"
+        }
+    ],
+    "require": {
+      "illuminate/database": "5.0.*"
+    },
+    "require-dev" : {
+      "phpunit/phpunit" : "5.*"
+    }
+}
