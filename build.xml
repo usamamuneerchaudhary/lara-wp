@@ -60,7 +60,7 @@
 
     <target name="docs" depends="mess-detector">
         <exec command="phpdoc
-            -d app
+            -d src
             -t reports/doc
             --template responsive
             "/>
