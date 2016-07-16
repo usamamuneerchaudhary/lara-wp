@@ -21,6 +21,8 @@ class PostTest extends Orchestra\Testbench\TestCase {
             '--realpath' => realpath(__DIR__.'/../../database/migrations'),
         ]);
 
+        $this->withFactories(__DIR__.'/../../database/factories');
+
         $this->p = new \Letscodehu\Larablog\Models\Post();
     }
 
@@ -76,5 +78,73 @@ class PostTest extends Orchestra\Testbench\TestCase {
         $this->assertEquals("content",$this->p->getTrimmedContent());
     }
 
+    /**
+     * @test
+     */
+    public function it_returns_false_if_no_more_tag_presents() {
+        $this->p->setPostContent("status");
+        $this->assertFalse($this->p->contentHasMoreTag());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_true_if_more_tag_presents() {
+        $this->p->setPostContent("status".\Letscodehu\Larablog\Models\Post::MORE_TAG);
+        $this->assertTrue($this->p->contentHasMoreTag());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_the_day_from_post_date() {
+        $this->p->setPostDate("2015-10-23");
+        $this->assertEquals("23",$this->p->getCreateDay());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_the_month_from_post_date() {
+        $this->p->setPostDate("2015-10-23");
+        $this->assertEquals("Oct",$this->p->getCreateMonth());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_false_when_no_attachment_presents() {
+        $this->assertFalse($this->p->hasAttachment());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_tags_related_to_post() {
+        $tag = factory(Letscodehu\Larablog\Models\TermTaxonomy::class)->create([
+            "taxonomy" => \Letscodehu\Larablog\Models\Post::POST_TAG,
+        ]);
+        $category = factory(Letscodehu\Larablog\Models\TermTaxonomy::class)->create([
+            "taxonomy" => \Letscodehu\Larablog\Models\Post::CATEGORY,
+        ]);
+        $this->p = factory(\Letscodehu\Larablog\Models\Post::class)->create();
+        $this->p->terms()->saveMany([$tag, $category]);
+        $this->assertCount(1,$this->p->tags());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_categories_related_to_post() {
+        $tag = factory(Letscodehu\Larablog\Models\TermTaxonomy::class)->create([
+            "taxonomy" => \Letscodehu\Larablog\Models\Post::POST_TAG,
+        ]);
+        $category = factory(Letscodehu\Larablog\Models\TermTaxonomy::class)->create([
+            "taxonomy" => \Letscodehu\Larablog\Models\Post::CATEGORY,
+        ]);
+        $this->p = factory(\Letscodehu\Larablog\Models\Post::class)->create();
+        $this->p->terms()->saveMany([$tag, $category]);
+        $this->assertCount(1,$this->p->categories());
+    }
 
 }

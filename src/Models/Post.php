@@ -11,9 +11,26 @@ class Post extends Model
     const UPDATED_AT = 'post_modified';
 
     const MORE_TAG = "<!--more-->";
-    private $categories = [];
 
-    public $post_author, $post_content, $post_title, $post_name;
+    public $post_author, $post_content, $post_title, $post_name, $post_date;
+    const POST_TAG = "post_tag";
+    const CATEGORY = "category";
+
+    /**
+     * @return mixed
+     */
+    public function getPostDate()
+    {
+        return $this->post_date;
+    }
+
+    /**
+     * @param mixed $post_date
+     */
+    public function setPostDate($post_date)
+    {
+        $this->post_date = $post_date;
+    }
 
     /**
      * @return mixed
@@ -152,22 +169,22 @@ class Post extends Model
     }
 
     public function attachments() {
-        return $this->hasMany('\App\Models\Post', "post_parent", "ID")->where("post_type", "attachment");
+        return $this->hasMany('\Letscodehu\Larablog\Models\Post', "post_parent", "ID")->where("post_type", "attachment");
     }
 
     public function terms() {
-        return $this->belongsToMany('\App\Models\TermTaxonomy', 'wp_term_relationships', "object_id" , "term_taxonomy_id", "ID" );
+        return $this->belongsToMany('\Letscodehu\Larablog\Models\TermTaxonomy', 'wp_term_relationships', "object_id" , "term_taxonomy_id", "ID" );
     }
 
     public function tags() {
         return $this->terms()
-            ->where("taxonomy", "post_tag")->get();
+            ->where("taxonomy", self::POST_TAG)->get();
     }
 
 
     public function categories() {
         return $this->terms()
-            ->where("taxonomy", "category")->get();
+            ->where("taxonomy", self::CATEGORY)->get();
     }
 
     public function getCreateMonth() {
