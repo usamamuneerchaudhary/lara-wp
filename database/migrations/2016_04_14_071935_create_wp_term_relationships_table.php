@@ -15,7 +15,7 @@ class CreateWpTermRelationshipsTable extends Migration
         Schema::create("wp_term_relationships", function(Blueprint $table) {
             $table->bigInteger("object_id");
             $table->bigInteger("term_taxonomy_id");
-            $table->integer("term_order");
+            $table->integer("term_order")->default(0);
         });
     }
 
