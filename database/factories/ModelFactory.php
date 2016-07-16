@@ -14,6 +14,15 @@ $factory->define(\Letscodehu\Larablog\Models\User::class, function(\Faker\Genera
     ];
 });
 
+$factory->define(\Letscodehu\Larablog\Models\TermTaxonomy::class, function(\Faker\Generator $generator) {
+    return [
+        "term_id" => $generator->randomNumber(3),
+        "description" => $generator->text,
+        "parent" => 0,
+        "count" => 0
+    ];
+});
+
 
 $factory->define(\Letscodehu\Larablog\Models\Post::class, function(Faker\Generator $faker) {
     return [
@@ -28,6 +37,7 @@ $factory->define(\Letscodehu\Larablog\Models\Post::class, function(Faker\Generat
         "comment_count" => 0,
         "post_mime_type" => $faker->text(20),
         "post_type" => "post",
+        "post_date" => $faker->dateTime,
         "post_date_gmt" => $faker->dateTime,
         "post_modified_gmt" => $faker->dateTime,
         "post_excerpt" => $faker->text,
