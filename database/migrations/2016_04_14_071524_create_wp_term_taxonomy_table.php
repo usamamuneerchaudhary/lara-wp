@@ -12,7 +12,7 @@ class CreateWpTermTaxonomyTable extends Migration
      */
     public function up()
     {
-        Schema::create("wp_term_taxonomy", function(Blueprint $table) {
+        Schema::create("term_taxonomy", function(Blueprint $table) {
             $table->bigIncrements("term_taxonomy_id");
             $table->bigInteger("term_id");
             $table->string("taxonomy", 32);
@@ -29,6 +29,6 @@ class CreateWpTermTaxonomyTable extends Migration
      */
     public function down()
     {
-        Schema::drop("wp_term_taxonomy");
+        Schema::drop("term_taxonomy");
     }
 }

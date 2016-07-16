@@ -12,7 +12,7 @@ class CreateWpUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create("wp_users", function(Blueprint $table) {
+        Schema::create("users", function(Blueprint $table) {
             $table->bigIncrements("ID");
             $table->string("user_login", 60);
             $table->string("user_pass");
@@ -33,6 +33,6 @@ class CreateWpUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop("wp_users");
+        Schema::drop("users");
     }
 }

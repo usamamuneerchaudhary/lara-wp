@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Term extends Model
 {
-    protected $table = "wp_terms";
+    protected $table = "terms";
     public $timestamps = false;
     protected $fillable = ["name", "slug"];
 

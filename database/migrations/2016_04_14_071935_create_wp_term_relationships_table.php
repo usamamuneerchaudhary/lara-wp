@@ -12,7 +12,7 @@ class CreateWpTermRelationshipsTable extends Migration
      */
     public function up()
     {
-        Schema::create("wp_term_relationships", function(Blueprint $table) {
+        Schema::create("term_relationships", function(Blueprint $table) {
             $table->bigInteger("object_id");
             $table->bigInteger("term_taxonomy_id");
             $table->integer("term_order")->default(0);
@@ -26,6 +26,6 @@ class CreateWpTermRelationshipsTable extends Migration
      */
     public function down()
     {
-        Schema::drop("wp_term_relationships");
+        Schema::drop("term_relationships");
     }
 }

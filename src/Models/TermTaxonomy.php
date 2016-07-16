@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TermTaxonomy extends Model
 {
-    protected $table = "wp_term_taxonomy";
+    protected $table = "term_taxonomy";
 
     protected $primaryKey = "term_taxonomy_id";
 
@@ -26,7 +26,7 @@ class TermTaxonomy extends Model
     }
 
     public function related() {
-        return $this->belongsToMany('\App\Models\Post', "wp_term_relationships", "term_taxonomy_id", "object_id")
+        return $this->belongsToMany('\App\Models\Post', "term_relationships", "term_taxonomy_id", "object_id")
             ->where("post_status", "publish")
             ->where("post_type", "post");
     }

@@ -97,7 +97,7 @@ class Post extends Model
     }
 
 
-    protected $table = "wp_posts";
+    protected $table = "posts";
 
     protected $fillable = [
         "post_author",
@@ -173,7 +173,7 @@ class Post extends Model
     }
 
     public function terms() {
-        return $this->belongsToMany('\Letscodehu\Larablog\Models\TermTaxonomy', 'wp_term_relationships', "object_id" , "term_taxonomy_id", "ID" );
+        return $this->belongsToMany('\Letscodehu\Larablog\Models\TermTaxonomy', 'term_relationships', "object_id" , "term_taxonomy_id", "ID" );
     }
 
     public function tags() {

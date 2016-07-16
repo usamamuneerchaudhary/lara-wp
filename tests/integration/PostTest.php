@@ -39,7 +39,7 @@ class PostTest extends Orchestra\Testbench\TestCase {
         $app['config']->set('database.connections.testbench', [
             'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix'   => 'wp_',
         ]);
     }
 
@@ -145,6 +145,7 @@ class PostTest extends Orchestra\Testbench\TestCase {
         $this->p = factory(\Letscodehu\Larablog\Models\Post::class)->create();
         $this->p->terms()->saveMany([$tag, $category]);
         $this->assertCount(1,$this->p->categories());
+
     }
 
 }

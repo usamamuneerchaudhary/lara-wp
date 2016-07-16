@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TermRelationship extends Model
 {
-    protected $table = "wp_term_relationships";
+    protected $table = "term_relationships";
 
     public function taxonomies() {
         return $this->hasMany('\App\Models\TermTaxonomy', "term_taxonomy_id", "term_taxonomy_id");

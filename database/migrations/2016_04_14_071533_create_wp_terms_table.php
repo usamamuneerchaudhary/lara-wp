@@ -12,7 +12,7 @@ class CreateWpTermsTable extends Migration
      */
     public function up()
     {
-        Schema::create("wp_terms", function(Blueprint $table) {
+        Schema::create("terms", function(Blueprint $table) {
             $table->bigIncrements("term_id");
             $table->string("name", 200);
             $table->string("slug", 200);
@@ -27,6 +27,6 @@ class CreateWpTermsTable extends Migration
      */
     public function down()
     {
-        Schema::drop("wp_terms");
+        Schema::drop("terms");
     }
 }

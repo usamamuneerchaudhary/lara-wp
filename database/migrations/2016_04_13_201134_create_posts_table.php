@@ -12,7 +12,7 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-       Schema::create("wp_posts", function(Blueprint $table) {
+       Schema::create("posts", function(Blueprint $table) {
             $table->bigIncrements("ID");
             $table->bigInteger("post_author");
             $table->dateTime("post_date");
@@ -46,6 +46,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop("wp_posts");
+        Schema::drop("posts");
     }
 }
