@@ -2,7 +2,7 @@
 
 Laravel package to use Wordpress backends.
 
-[![Build Status](https://jenkins.letscode.hu/buildStatus/icon?job=Laravel Wordpress-bridge)](https://jenkins.letscode.hu/job/Laravel Wordpress-bridge)
+[![Build Status](https://travis-ci.org/letscodehu/lara-wp.svg?branch=development)](https://travis-ci.org/letscodehu/lara-wp)
 
 ## License
 
