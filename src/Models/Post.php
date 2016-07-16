@@ -13,6 +13,72 @@ class Post extends Model
     const MORE_TAG = "<!--more-->";
     private $categories = [];
 
+    public $post_author, $post_content, $post_title, $post_name;
+
+    /**
+     * @return mixed
+     */
+    public function getPostAuthor()
+    {
+        return $this->post_author;
+    }
+
+    /**
+     * @param mixed $post_author
+     */
+    public function setPostAuthor($post_author)
+    {
+        $this->post_author = $post_author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostContent()
+    {
+        return $this->post_content;
+    }
+
+    /**
+     * @param mixed $post_content
+     */
+    public function setPostContent($post_content)
+    {
+        $this->post_content = $post_content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostTitle()
+    {
+        return $this->post_title;
+    }
+
+    /**
+     * @param mixed $post_title
+     */
+    public function setPostTitle($post_title)
+    {
+        $this->post_title = $post_title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostName()
+    {
+        return $this->post_name;
+    }
+
+    /**
+     * @param mixed $post_name
+     */
+    public function setPostName($post_name)
+    {
+        $this->post_name = $post_name;
+    }
+
 
     protected $table = "wp_posts";
 
@@ -43,6 +109,10 @@ class Post extends Model
 
     public function getUrl() {
         return date("Y/m/d/", strtotime($this->post_date)).$this->post_name;
+    }
+
+    public function setLead($lead) {
+        $this->post_excerpt = $lead;
     }
 
     public function getLead() {

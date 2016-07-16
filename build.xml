@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Wordpress-bridge" default="docs">
+    <property file="sonar-project.properties" />
+
+
+    <!-- ============================================  -->
+    <!-- Target: prepare                               -->
+    <!-- ============================================  -->
+    <target name="prepare">
+        <echo msg="Making directory ./reports/coverage" />
+        <mkdir dir="./reports" />
+        <mkdir dir="./build" />
+        <mkdir dir="./reports/coverage" />
+    </target>
+
+
+
+    <fileset dir="tests" id="tests">
+        <include name="**/*.php"/>
+    </fileset>
+
+    <fileset dir="." id="source">
+        <include name="src/*.php"/>
+        <include name="database/*.php"/>
+        <include name="tests/*.php"/>
+    </fileset>
+
+
+    <target name="lint" description="Perform syntax check of sourcecode files" depends="prepare">
+        <phplint haltonfailure="true" cachefile="./reports/lint.cache">
+            <fileset refid="source"/>
+            <fileset refid="tests"/>
+        </phplint>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: build                                 -->
+    <!-- ============================================  -->
+    <target name="composer" depends="lint">
+        <exec command="composer update" checkreturn="true" passthru="true" />
+        <echo msg="Dependencies resolved!" />
+    </target>
+
+    <target name="test" depends="composer">
+        <exec dir="."
+              command="phpunit --log-junit 'reports/unitreport.xml'
+                       --coverage-html 'reports/coverage'
+                       --coverage-clover 'reports/coverage/coverage.xml'
+                       "
+         passthru="true" />
+        <echo msg="Tests run without errors!" />
+    </target>
+
+    <target name="mess-detector" depends="test">
+        <phpmd pharLocation="/usr/local/bin/phpmd.phar">
+            <fileset refid="source"/>
+            <formatter type="xml" outfile="./reports/pmd.xml"/>
+        </phpmd>
+    </target>
+
+    <target name="docs" depends="mess-detector">
+        <exec command="phpdoc
+            -d app
+            -t reports/doc
+            --template responsive
+            "/>
+    </target>
+
+</project>
