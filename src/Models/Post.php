@@ -191,6 +191,18 @@ class Post extends Model
         return date("M", strtotime($this->post_date));
     }
 
+    public function metas() {
+        return $this->hasMany(PostMeta::class);
+    }
+
+    public function getMetas() {
+        return $this->metas;
+    }
+
+    public function getMetaByKey($key) {
+        return $this->metas->where("meta_key", $key)->first();
+    }
+
     public function getCreateDay() {
         return date("d", strtotime($this->post_date));
     }

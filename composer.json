@@ -4,16 +4,23 @@
     "authors": [
         {
             "name": "Papp Krisztian",
-            "email": "fejlesztes@letscode.hu"
+            "email": "fejlesztes@letscode.hu",
+            "role" : "Developer",
+            "homepage" : "https://www.letscode.hu"
         }
     ],
     "require": {
       "illuminate/database": "5.*"
     },
+    "support" : {
+        "source" : "https://github.com/letscodehu/larablog",
+        "issues" : "https://github.com/letscodehu/larablog/issues"
+    },
     "require-dev" : {
       "phpunit/phpunit" : "5.*",
       "orchestra/testbench" : "~3.2",
-      "fzaninotto/faker" : "1.*"
+      "fzaninotto/faker" : "1.*",
+      "phpdocumentor/phpdocumentor" : "2.*"
     },
     "autoload" : {
       "psr-4" : {

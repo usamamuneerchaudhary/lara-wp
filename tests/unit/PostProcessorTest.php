@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tacsiazuma
- * Date: 2016.07.03.
- * Time: 15:32
- */
 
 namespace tests\unit;
 

@@ -1,47 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tacsiazuma
- * Date: 2016.07.16.
- * Time: 17:21
- */
 
-class PostTest extends Orchestra\Testbench\TestCase {
+class PostTest extends AbstractIntegrationTest {
+
+    use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
     /** @var  \Letscodehu\Larablog\Models\Post */
     private $p;
 
     public function setUp() {
         parent::setUp();
-        // we need to set up database connection first
-
-
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../../database/migrations'),
-        ]);
-
-        $this->withFactories(__DIR__.'/../../database/factories');
-
         $this->p = new \Letscodehu\Larablog\Models\Post();
     }
 
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        // Setup default database to use sqlite :memory:
-        $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => 'wp_',
-        ]);
-    }
+
 
     /**
      * @test
@@ -146,6 +117,43 @@ class PostTest extends Orchestra\Testbench\TestCase {
         $this->p->terms()->saveMany([$tag, $category]);
         $this->assertCount(1,$this->p->categories());
 
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_the_metadata_as_collection() {
+        $this->assertTrue($this->p->getMetas() instanceof \Illuminate\Database\Eloquent\Collection);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_the_metadatas() {
+        $this->p = factory(\Letscodehu\Larablog\Models\Post::class)->create();
+        $meta = new \Letscodehu\Larablog\Models\PostMeta();
+        $meta->meta_key = "test";
+        $meta->meta_value = "test_value";
+        $this->p->metas()->save($meta);
+        $this->assertTrue($this->p->getMetas() instanceof \Illuminate\Database\Eloquent\Collection);
+        $this->assertEquals("test", $this->p->getMetas()->first()->meta_key);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_the_metadata_with_key() {
+        $this->p = factory(\Letscodehu\Larablog\Models\Post::class)->create();
+        $meta = new \Letscodehu\Larablog\Models\PostMeta();
+        $meta->meta_key = "test";
+        $meta->meta_value = "test_value";
+        $meta2 = new \Letscodehu\Larablog\Models\PostMeta();
+        $meta2->meta_key = "test2";
+        $meta2->meta_value = "test_value";
+        $this->p->metas()->saveMany([$meta, $meta2]);
+        $metaQueried = $this->p->getMetaByKey("test");
+        $this->assertTrue( $metaQueried instanceof \Letscodehu\Larablog\Models\PostMeta);
+        $this->assertEquals("test", $metaQueried->meta_key);
     }
 
 }

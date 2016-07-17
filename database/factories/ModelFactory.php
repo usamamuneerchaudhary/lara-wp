@@ -14,6 +14,13 @@ $factory->define(\Letscodehu\Larablog\Models\User::class, function(\Faker\Genera
     ];
 });
 
+$factory->define(\Letscodehu\Larablog\Models\PostMeta::class, function(\Faker\Generator $faker) {
+   return [
+        "meta_key" => $faker->text,
+       "meta_value" => $faker->text
+   ];
+});
+
 $factory->define(\Letscodehu\Larablog\Models\TermTaxonomy::class, function(\Faker\Generator $generator) {
     return [
         "term_id" => $generator->randomNumber(3),

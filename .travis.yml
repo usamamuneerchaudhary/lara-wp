@@ -3,3 +3,7 @@ install: composer install
 php:
   - '5.6'
   - '7.0'
+
+after_success:
+    # Generate API documentation
+    - sh -c "if [ '$TRAVIS_PHP_VERSION' = '7.0' ] && [ '$DB' = 'mysql' ]; then php vendor/bin/phpdoc run; fi"
