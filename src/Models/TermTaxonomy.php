@@ -14,7 +14,7 @@ class TermTaxonomy extends Model
     protected $fillable = ["term_id", "taxonomy", "parent", "count"];
 
     public function term() {
-        return $this->hasOne('\App\Models\Term', "term_id");
+        return $this->hasOne('\Letscodehu\Larablog\Models\Term', "term_id");
     }
 
     public function getName() {

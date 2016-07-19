@@ -8,7 +8,7 @@ class Term extends Model
 {
     protected $table = "terms";
     public $timestamps = false;
-    protected $fillable = ["name", "slug"];
+    protected $fillable = ["name", "slug", "term_group"];
 
     public function taxonomies() {
         return $this->hasOne('\App\Models\TermTaxonomy', "term_id", "term_id");

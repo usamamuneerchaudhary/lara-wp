@@ -23,10 +23,19 @@ $factory->define(\Letscodehu\Larablog\Models\PostMeta::class, function(\Faker\Ge
 
 $factory->define(\Letscodehu\Larablog\Models\TermTaxonomy::class, function(\Faker\Generator $generator) {
     return [
-        "term_id" => $generator->randomNumber(3),
         "description" => $generator->text,
         "parent" => 0,
-        "count" => 0
+        "count" => 0,
+        "term_id" => 0,
+        "taxonomy" => $generator->randomElement([\Letscodehu\Larablog\Models\Post::CATEGORY, \Letscodehu\Larablog\Models\Post::POST_TAG])
+    ];
+});
+
+$factory->define(\Letscodehu\Larablog\Models\Term::class, function(Faker\Generator $faker ) {
+    return  [
+        "name" => $faker->name,
+        "slug" => $faker->slug,
+        "term_group" => $faker->numberBetween(0,100)
     ];
 });
 
