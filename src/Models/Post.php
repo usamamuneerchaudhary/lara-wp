@@ -4,6 +4,14 @@ namespace Letscodehu\Larablog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * Class Post
+ *
+ *
+ *
+ * @package Letscodehu\Larablog\Models
+ */
 class Post extends Model
 {
     protected $primaryKey = 'ID';
@@ -12,12 +20,13 @@ class Post extends Model
 
     const MORE_TAG = "<!--more-->";
 
-    public $post_author, $post_content, $post_title, $post_name, $post_date;
     const POST_TAG = "post_tag";
     const CATEGORY = "category";
 
     /**
-     * @return mixed
+     * Gets the posts date
+     *
+     * @return string
      */
     public function getPostDate()
     {
@@ -25,7 +34,9 @@ class Post extends Model
     }
 
     /**
-     * @param mixed $post_date
+     * Sets the post's date
+     *
+     * @param string $post_date
      */
     public function setPostDate($post_date)
     {

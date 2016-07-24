@@ -8,14 +8,9 @@ class TermRelationship extends Model
 {
     protected $table = "term_relationships";
 
-    public function taxonomies() {
-        return $this->hasMany('\App\Models\TermTaxonomy', "term_taxonomy_id", "term_taxonomy_id");
+    public function taxonomy() {
+        return $this->belongsTo('\Letscodehu\Larablog\Models\TermTaxonomy', "term_taxonomy_id", "term_taxonomy_id");
     }
-
-    public function term() {
-
-    }
-
 
     public $timestamps = false;
     protected $fillable = [

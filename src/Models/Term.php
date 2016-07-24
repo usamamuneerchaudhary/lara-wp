@@ -10,8 +10,8 @@ class Term extends Model
     public $timestamps = false;
     protected $fillable = ["name", "slug", "term_group"];
 
-    public function taxonomies() {
-        return $this->hasOne('\App\Models\TermTaxonomy', "term_id", "term_id");
+    public function taxonomy() {
+        return $this->belongsTo('\Letscodehu\Larablog\Models\TermTaxonomy', "term_id", "term_id");
     }
 
     public function category() {

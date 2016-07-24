@@ -26,7 +26,7 @@ class TermTaxonomy extends Model
     }
 
     public function related() {
-        return $this->belongsToMany('\App\Models\Post', "term_relationships", "term_taxonomy_id", "object_id")
+        return $this->belongsToMany('\Letscodehu\Larablog\Models\Post', "term_relationships", "term_taxonomy_id", "object_id")
             ->where("post_status", "publish")
             ->where("post_type", "post");
     }
@@ -34,7 +34,5 @@ class TermTaxonomy extends Model
     public function getCount() {
         return $this->count;
     }
-    public function getFontSize() {
-        return $this->fontsize;
-    }
+
 }

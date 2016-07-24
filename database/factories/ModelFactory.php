@@ -65,3 +65,9 @@ $factory->define(\Letscodehu\Larablog\Models\Post::class, function(Faker\Generat
         "pinged" =>$faker->text(20),
     ];
 });
+
+$factory->define(\Letscodehu\Larablog\Models\TermRelationship::class, function(\Faker\Generator $faker) {
+   return [
+        "object_id" => 43
+   ];
+});
